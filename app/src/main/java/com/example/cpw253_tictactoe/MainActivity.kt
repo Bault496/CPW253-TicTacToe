@@ -47,6 +47,15 @@ class MainActivity : AppCompatActivity() {
         if(view !is Button)
             return
         addToBoard(view)
+        if(fullBoard())
+        {
+            result("Draw")
+        }
+    }
+
+    private fun result(s: String)
+    {
+        binding.textView.text = s
     }
 
     fun clickNewGame(view: View)
@@ -92,6 +101,16 @@ class MainActivity : AppCompatActivity() {
             turnText = "Player $NOUGHT's Turn"
 
         binding.textView.text = turnText
+    }
+
+    private fun fullBoard(): Boolean
+    {
+        for(button in boardList)
+        {
+            if(button.text == "")
+            return false
+        }
+        return true
     }
 
     companion object
