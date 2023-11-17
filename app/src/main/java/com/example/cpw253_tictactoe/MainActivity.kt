@@ -47,11 +47,48 @@ class MainActivity : AppCompatActivity() {
         if(view !is Button)
             return
         addToBoard(view)
+
+        if(checkForVictory(NOUGHT)) {
+            result("$NOUGHT wins")
+        }
+        if(checkForVictory(CROSS)) {
+            result("$CROSS wins")
+        }
+
         if(fullBoard())
         {
             result("Draw")
         }
     }
+
+    private fun checkForVictory(crossOrNought: String): Boolean
+    {
+        // Horizontal Victories
+        if(match(binding.button1,crossOrNought) && match(binding.button2,crossOrNought) && match(binding.button3,crossOrNought))
+         return true
+        if(match(binding.button4,crossOrNought) && match(binding.button5,crossOrNought) && match(binding.button6,crossOrNought))
+            return true
+        if(match(binding.button7,crossOrNought) && match(binding.button8,crossOrNought) && match(binding.button9,crossOrNought))
+            return true
+
+        // Vertical Victories
+        if(match(binding.button1,crossOrNought) && match(binding.button4,crossOrNought) && match(binding.button7,crossOrNought))
+            return true
+        if(match(binding.button2,crossOrNought) && match(binding.button5,crossOrNought) && match(binding.button8,crossOrNought))
+            return true
+        if(match(binding.button3,crossOrNought) && match(binding.button6,crossOrNought) && match(binding.button9,crossOrNought))
+            return true
+
+        // Diagonal Victories
+        if(match(binding.button1,crossOrNought) && match(binding.button5,crossOrNought) && match(binding.button9,crossOrNought))
+            return true
+        if(match(binding.button3,crossOrNought) && match(binding.button5,crossOrNought) && match(binding.button7,crossOrNought))
+            return true
+
+        return false
+    }
+
+    private fun match(button: Button, symbol : String) : Boolean = button.text == symbol
 
     private fun result(s: String)
     {
